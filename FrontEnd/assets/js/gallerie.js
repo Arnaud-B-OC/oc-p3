@@ -28,11 +28,59 @@ function req(endpoint) {
     })
 }
 
+function createFilter(id, name, checked = false) {
+    let div = document.createElement('div')
+    div.id = 'filter-'+id
+
+    let input = document.createElement('input')
+    input.id = 'radio-'+id
+    input.type = 'radio'
+    input.checked = checked
+    input.name = 'filter'
+    div.appendChild(input)
+
+    let label = document.createElement('label')
+    label.innerText = name
+    label.htmlFor = 'radio-'+id
+    label.addEventListener('click', () => renderProjects(id))
+
+    div.appendChild(label)
+    
+    return div
+}
+
+req('/categories').then((data) => {
+    let filters = document.getElementById('filters')
+    filters.innerHTML = ''
+
+    console.log(data)
+
+    filters.appendChild(createFilter(0, 'Tous', true))
+
+    data.map((item) => {
+        filters.appendChild(createFilter(item.id, item.name))
+    });
+
+	// {
+	// 	"id": 1,
+	// 	"name": "Objets"
+	// },
+
+});
+
+let projects = []
 req('/works').then((data) => {
+    projects = data
+    renderProjects()
+});
+
+function renderProjects(filter = 0) {
     let gallery = document.getElementById('gallery')
     gallery.innerHTML = ''
-    
-    data.map((item) => {
+
+    projects.map((item) => {
+        if (filter != 0 && item.categoryId != filter) return;
+
         let e = document.createElement('figure')
         e.id = item.id
 
@@ -48,16 +96,6 @@ req('/works').then((data) => {
 
         gallery.appendChild(e)
     });
+}
 
-//     "id": 1,
-//     "title": "Abajour Tahina",
-//     "imageUrl": "http://localhost:5678/images/abajour-tahina1651286843956.png",
-//     "categoryId": 1,
-//     "userId": 1,
-//     "category": {
-//       "id": 1,
-//       "name": "Objets"
-//     }
-
-});
 

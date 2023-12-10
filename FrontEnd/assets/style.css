@@ -186,3 +186,39 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Filter */
+.filter {
+	display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+	gap: 10px;
+	margin: 3em;
+}
+.filter > div {
+	display: flex;
+}
+.filter label {
+	background-color: #fff;
+	border-radius: 60px;
+	padding: 9px 20px;
+	box-sizing: border-box;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	text-align: center;
+	font-family: Syne;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	cursor: pointer;
+}
+.filter input[type=radio]:checked ~ label {
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	background-color: #1D6154;
+	color: #fff;
+}
+.filter input[type=radio] {
+	display: none;
+}
+
