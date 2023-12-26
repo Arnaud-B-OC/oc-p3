@@ -9,20 +9,50 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="./assets/js/gallery.js"></script>
 </head>
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="index.html">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a id="login" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
 <main>
+	<div class="modal-div">
+		<div class="modal-overlay toggle-modal"></div>
+		<div class="modal">
+			<button class="btn btn-close toggle-modal">X</button>
+			<p>Galerie photo</p>
+			<div class="gallery-edit"></div>
+			<hr>
+			<input id="addPhoto" type="button" value="Ajouter une photo">
+		</div>
+		<div class="modal sec-modal">
+			<button class="btn btn-close toggle-modal">X</button>
+			<p>Ajout photo</p>
+			
+			<form>
+				<input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" >
+				
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title">
+
+				<label for="title">Catégorie</label>
+				<select id="selectCategory">
+
+				</select>
+			</form>
+			<hr>
+			<input id="validatePhoto" type="button" value="Valider">
+		</div>
+	</div>
+
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -34,26 +64,17 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div id="filters" class="filter">
-			<div>
-				<input type="radio" name="filter" id="filterid" checked>	
-				<label for="filterid">Test</label>
-			</div>
-			<div>
-				<label for="filteri2d">Test</label>
-				<input type="radio" name="filter" id="filteri2d">	
-			</div>
-			<div>
-				<input type="radio" name="filter" id="filteri3d">	
-				<label for="filteri3d">Test</label>
-			</div>
-			
+		<div class="title">
+			<h2>Mes Projets</h2>
+			<button class="btn btn-edit toggle-modal"><img src="./assets/icons/edit.svg">Modifier</button>
 		</div>
 
+		<div id="filters" class="filter"></div>
 		<div id="gallery" class="gallery"></div>
 	</section>
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -68,7 +89,9 @@
 		</form>
 	</section>
 
-	<script src="./assets/js/gallerie.js"></script>
+	<script>
+		loadGallery();
+	</script>
 </main>
 
 <footer>
