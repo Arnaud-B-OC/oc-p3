@@ -26,30 +26,37 @@
 <main>
 	<div class="modal-div">
 		<div class="modal-overlay toggle-modal"></div>
-		<div class="modal">
+		<div id="modalViewPhoto" class="modal">
 			<button class="btn btn-close toggle-modal">X</button>
 			<p>Galerie photo</p>
 			<div class="gallery-edit"></div>
 			<hr>
 			<input id="addPhoto" type="button" value="Ajouter une photo">
 		</div>
-		<div class="modal sec-modal">
+		
+		<div id="modalAddPhoto" class="modal hide">
 			<button class="btn btn-close toggle-modal">X</button>
 			<p>Ajout photo</p>
 			
-			<form>
-				<input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" >
-				
+			<form id="validatePhoto">
+				<p class="err"></p>
+				<input type="file" name="file" id="file" accept=".jpg, .jpeg, .png">
+				<label for="file" class="file-label">
+					<img src="assets/icons/blank_image.svg">
+					<span class="btn-photo">+ Ajouter photo</span>
+					<span class="file-type">jpg, png : 4Mo max</span>
+				</label>
+
 				<label for="title">Titre</label>
-				<input type="text" name="title" id="title">
+				<input type="text" name="title" id="title" required>
 
 				<label for="title">Catégorie</label>
-				<select id="selectCategory">
+				<select id="selectCategory" name="selectedCategory" required></select>
+				
+				<hr>
 
-				</select>
+				<input type="submit" value="Valider">
 			</form>
-			<hr>
-			<input id="validatePhoto" type="button" value="Valider">
 		</div>
 	</div>
 

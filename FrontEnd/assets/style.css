@@ -389,9 +389,10 @@ input:invalid {
 	display: block;
 }
 .modal input[type=button] {
-	margin: 45px 0;
+	margin: 45px auto;
 }
 .modal p {
+	font-family: Work Sans;
 	font-size: 26px;
 	font-weight: 400;
 	text-align: center;
@@ -413,6 +414,64 @@ input:invalid {
     padding: 20px 100px;
     gap: 8px;
 }
+
+.modal.hide {
+	display: none;
+}
+.modal label {
+	font-family: Work Sans;
+	margin-top: 30px;
+}
+
+
+
+/* Modal Add Photo */
+.modal input[type=file] {
+	display: none;
+}
+.file-label {
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px
+}
+.file-label img {
+	margin-top: 12px;
+	height: 75px;
+	width: 75px;
+}
+.btn-photo {
+	display: block;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+	padding: 10px 30px;
+
+	font-size: 14px;
+	color: #306685;
+	font-weight: 500;
+}
+.file-type {
+	font-size: 10px;
+	margin-bottom: 20px;
+	color: #444;
+	font-weight: 400;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Button */
 .logged .btn-edit {
@@ -446,4 +505,33 @@ input:invalid {
 	color: #1D6154;
 }
 
+.gallery-edit div {
+	position: relative;
+}
+
+/* btn-remove-project */
+.btn-remove-project {
+	height: 20px;
+	width: 20px;
+	background-color: #000;
+	background-image: url('../assets/icons/remove.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+
+	position: absolute;
+	display: block;
+	top: 5px;
+	right: 5px;
+}
+
+figure.hide {
+	display: none;
+}
+#gallery {
+	transition: opacity 0.4s;
+	opacity: 1;
+}
+#gallery.loading {
+	opacity: 0;
+}
 
