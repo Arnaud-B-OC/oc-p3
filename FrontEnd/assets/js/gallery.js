@@ -2,7 +2,7 @@
 const API_URL = 'http://localhost:5678/api'
 
 let token = localStorage.getItem('token')
-function req(endpoint, data = undefined, method = 'GET', headers = {'content-type': 'application/json'}) {
+function request(endpoint, data = undefined, method = 'GET', headers = {'content-type': 'application/json'}) {
     return new Promise((resolve, reject) => {
         fetch(API_URL + endpoint, {
             method: method,
@@ -34,8 +34,9 @@ function req(endpoint, data = undefined, method = 'GET', headers = {'content-typ
     });
 }
 
+
 function addWork(formData) {
-    req('/works', formData, 'POST', {}).then((data) => {
+    request('/works', formData, 'POST', {}).then((data) => {
         projects.push(data);
         renderProjects();
         toggleModal();
@@ -57,8 +58,10 @@ function addWork(formData) {
         }
     });
 }
+
+
 function removeWork(id) {
-    req(`/works/${id}`, undefined, 'DELETE').then(() => {
+    request(`/works/${id}`, undefined, 'DELETE').then(() => {
         projects = projects.filter((project) => project.id != id)
         renderProjects()
         renderProjectsInModal()
@@ -80,6 +83,7 @@ function removeWork(id) {
 // ### Render Projects ### //
 let projects = []
 let selected_filter = 0
+
 function renderProjects(filter = 0) {
     let gallery = document.getElementById('gallery')
     gallery.innerHTML = ''
@@ -104,6 +108,8 @@ function renderProjects(filter = 0) {
         gallery.appendChild(e)
     });
 }
+
+
 function renderProjectsInModal() {
     let editGallery = document.querySelector('.gallery-edit')
     editGallery.innerHTML = ''
@@ -122,6 +128,8 @@ function renderProjectsInModal() {
         editGallery.appendChild(workDiv)
     });
 }
+
+
 function renderProjectsFilter(filter = 0) {
     let gallery = document.querySelector('#gallery')
     if (!gallery.classList.contains('loading')) return;
@@ -139,6 +147,8 @@ function renderProjectsFilter(filter = 0) {
 
 // ### Render Categories ### //
 let categories = []
+
+
 function renderCategories() {
     let filters = document.getElementById('filters');
     filters.innerHTML = '';
@@ -146,6 +156,8 @@ function renderCategories() {
     filters.appendChild(createCategoryFilter(0, 'Tous', true));
     categories.map((item) => filters.appendChild(createCategoryFilter(item.id, item.name)));
 }
+
+
 function createCategoryFilter(id, name, checked = false) {
     let div = document.createElement('div')
     div.id = 'filter-'+id
@@ -170,6 +182,8 @@ function createCategoryFilter(id, name, checked = false) {
     
     return div
 }
+
+
 function renderCategoriesInModal() {
     let select = document.querySelector('#selectCategory')
     select.innerHTML = ''
@@ -198,18 +212,20 @@ function loadGallery() {
     let gallery = document.querySelector('#gallery')
     gallery?.addEventListener('transitionend', (e) => renderProjectsFilter(selected_filter))
 
-    req('/categories').then((data) => {
+    request('/categories').then((data) => {
         categories = data;
         renderCategories();
     });
     
-    req('/works').then((data) => {
+    request('/works').then((data) => {
         projects = data;
         renderProjects();
     });
 
     if (token) initModal();
 }
+
+
 function loadConnexion() {
     if (token) {
         location.href = '/'
@@ -220,7 +236,7 @@ function loadConnexion() {
         e.preventDefault();
         let data = Object.fromEntries(new FormData(document.getElementById('connect')));
 
-        req('/users/login', JSON.stringify(data), 'POST').then((json) => {
+        request('/users/login', JSON.stringify(data), 'POST').then((json) => {
             localStorage.setItem('token', json.token)
             location.href = '/'
         }).catch((errCode) => {
@@ -237,17 +253,19 @@ function toggleModal() {
     if (!modalDiv) modalDiv = document.querySelector('.modal-div');
 
     if (!modalDiv.classList.contains('active')) {
-        // Opening
         openModalPhotoView();
     }
-
+    
     modalDiv.classList.toggle('active');
 }
+
+
 async function initModal() {
     document.querySelectorAll('.toggle-modal').forEach((toggle) => toggle.addEventListener('click', toggleModal))
     document.querySelector('#addPhoto').addEventListener('click', openModalAddPhoto)
     document.querySelector('#validatePhoto').addEventListener('submit', validatePhoto)
 }
+
 
 async function openModalPhotoView() {
     document.querySelector('#modalAddPhoto').classList.add('hide')
@@ -255,14 +273,18 @@ async function openModalPhotoView() {
 
     renderProjectsInModal();
 }
+
+
 async function openModalAddPhoto() {
     document.querySelector('#modalAddPhoto').classList.remove('hide')
     document.querySelector('#modalViewPhoto').classList.add('hide')
 
+    document.querySelector('p.err').innerText = ''
     document.querySelector('#title').value = ''
 
     renderCategoriesInModal();
 }
+
 
 async function validatePhoto(e) {
     e.preventDefault();
