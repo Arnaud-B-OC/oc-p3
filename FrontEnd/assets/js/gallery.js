@@ -2,6 +2,7 @@
 const API_URL = 'http://localhost:5678/api'
 
 let token = localStorage.getItem('token')
+// Request to api function
 function request(endpoint, data = undefined, method = 'GET', headers = {'content-type': 'application/json'}) {
     return new Promise((resolve, reject) => {
         fetch(API_URL + endpoint, {
@@ -34,7 +35,7 @@ function request(endpoint, data = undefined, method = 'GET', headers = {'content
     });
 }
 
-
+// Add project function
 function addWork(formData) {
     request('/works', formData, 'POST', {}).then((data) => {
         projects.push(data);
@@ -59,7 +60,7 @@ function addWork(formData) {
     });
 }
 
-
+// Remove project function
 function removeWork(id) {
     request(`/works/${id}`, undefined, 'DELETE').then(() => {
         projects = projects.filter((project) => project.id != id)
@@ -84,6 +85,7 @@ function removeWork(id) {
 let projects = []
 let selected_filter = 0
 
+// Render projects list in main page function
 function renderProjects(filter = 0) {
     let gallery = document.getElementById('gallery')
     gallery.innerHTML = ''
@@ -109,7 +111,7 @@ function renderProjects(filter = 0) {
     });
 }
 
-
+// Render projects list in modal function
 function renderProjectsInModal() {
     let editGallery = document.querySelector('.gallery-edit')
     editGallery.innerHTML = ''
@@ -129,7 +131,7 @@ function renderProjectsInModal() {
     });
 }
 
-
+// TODO : Add comment
 function renderProjectsFilter(filter = 0) {
     let gallery = document.querySelector('#gallery')
     if (!gallery.classList.contains('loading')) return;
@@ -148,7 +150,7 @@ function renderProjectsFilter(filter = 0) {
 // ### Render Categories ### //
 let categories = []
 
-
+// Render categories list in main page function
 function renderCategories() {
     let filters = document.getElementById('filters');
     filters.innerHTML = '';
@@ -157,7 +159,7 @@ function renderCategories() {
     categories.map((item) => filters.appendChild(createCategoryFilter(item.id, item.name)));
 }
 
-
+// Create filter object function
 function createCategoryFilter(id, name, checked = false) {
     let div = document.createElement('div')
     div.id = 'filter-'+id
@@ -183,7 +185,7 @@ function createCategoryFilter(id, name, checked = false) {
     return div
 }
 
-
+// Render categories list in modal function
 function renderCategoriesInModal() {
     let select = document.querySelector('#selectCategory')
     select.innerHTML = ''
@@ -196,6 +198,8 @@ function renderCategoriesInModal() {
 }
 
 // ### Pages Load ### //
+
+// Initialize all needed for main page function
 function loadGallery() {
     if (token) {
         let loginPageBtn = document.getElementById('login')
@@ -225,7 +229,7 @@ function loadGallery() {
     if (token) initModal();
 }
 
-
+// Initialize all needed for login page function
 function loadConnexion() {
     if (token) {
         location.href = '/'
@@ -245,10 +249,10 @@ function loadConnexion() {
     });
 }
 
-
-
 // ### Modal ### //
 let modalDiv;
+
+// Show/hide modal function
 function toggleModal() {
     if (!modalDiv) modalDiv = document.querySelector('.modal-div');
 
@@ -259,14 +263,14 @@ function toggleModal() {
     modalDiv.classList.toggle('active');
 }
 
-
+// Initialize all needed for modal function
 async function initModal() {
     document.querySelectorAll('.toggle-modal').forEach((toggle) => toggle.addEventListener('click', toggleModal))
     document.querySelector('#addPhoto').addEventListener('click', openModalAddPhoto)
     document.querySelector('#validatePhoto').addEventListener('submit', validatePhoto)
 }
 
-
+// Open photos view modal function
 async function openModalPhotoView() {
     document.querySelector('#modalAddPhoto').classList.add('hide')
     document.querySelector('#modalViewPhoto').classList.remove('hide')
@@ -274,7 +278,7 @@ async function openModalPhotoView() {
     renderProjectsInModal();
 }
 
-
+// Open add photo modal function
 async function openModalAddPhoto() {
     document.querySelector('#modalAddPhoto').classList.remove('hide')
     document.querySelector('#modalViewPhoto').classList.add('hide')
@@ -285,7 +289,7 @@ async function openModalAddPhoto() {
     renderCategoriesInModal();
 }
 
-
+// Validate data from 'add photo modal' and send it function
 async function validatePhoto(e) {
     e.preventDefault();
 
@@ -311,10 +315,10 @@ async function validatePhoto(e) {
         return;
     }
 
-    let reqData = new FormData()
-    reqData.append('image', data.file)
-    reqData.append('title', data.title)
-    reqData.append('category', data.selectedCategory)
+    let reqData = new FormData();
+    reqData.append('image', data.file);
+    reqData.append('title', data.title);
+    reqData.append('category', data.selectedCategory);
 
-    addWork(reqData)
+    addWork(reqData);
 }
