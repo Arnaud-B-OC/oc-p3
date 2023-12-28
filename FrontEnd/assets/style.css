@@ -304,6 +304,7 @@ form {
 /* Input */
 input[type=text],
 select {
+	font-family: 'Work Sans';
 	background-color: #fff;
 	height: 50px;
     font-size: 1.2em;
@@ -318,6 +319,7 @@ select {
 /* Buttons */
 input[type=button],
 input[type=submit] {
+	font-family: Syne;
 	height: 50px;
     font-size: 1.2em;
     border: none;
@@ -398,10 +400,12 @@ input:invalid {
 	text-align: center;
 }
 .modal hr {
-	width: 420px;
+	max-width: 420px;
+	width: 100%;
 	background-color: #B3B3B3;
 	height: 1px;
 	border-radius: 25px;
+	margin-top: 20px;
 }
 .modal img {
 	height: 100px;
