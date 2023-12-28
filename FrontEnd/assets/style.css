@@ -217,6 +217,7 @@ nav a:hover {
 	display: flex;
 }
 .filter label {
+	user-select: none;
 	background-color: #fff;
 	border-radius: 60px;
 	padding: 9px 20px;
@@ -310,7 +311,8 @@ select {
     font-size: 1.2em;
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	text-align: center;
+	text-align: left;
+	padding: 10px;
 	margin-top: 6px;
 	box-sizing: border-box;
 	background: #FFF;
@@ -344,14 +346,6 @@ input:invalid {
 .title {
 	display: flex;
     justify-content: center;
-}
-
-/* Error Message */
-.err {
-	color: rgb(233, 58, 58);
-	font-weight: bold;
-	text-align: center;
-	font-size: 16px;
 }
 
 /* Modal */
@@ -464,19 +458,13 @@ input:invalid {
 	font-weight: 400;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Error Message */
+p.err {
+	color: rgb(233, 58, 58);
+	font-weight: bold;
+	text-align: center;
+	font-size: 16px;
+}
 
 /* Button */
 .logged .btn-edit {

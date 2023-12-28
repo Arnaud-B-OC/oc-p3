@@ -268,6 +268,7 @@ async function initModal() {
     document.querySelectorAll('.toggle-modal').forEach((toggle) => toggle.addEventListener('click', toggleModal))
     document.querySelector('#addPhoto').addEventListener('click', openModalAddPhoto)
     document.querySelector('#validatePhoto').addEventListener('submit', validatePhoto)
+    document.querySelector('#file').addEventListener('change', onPhotoChange)
 }
 
 // Open photos view modal function
@@ -287,8 +288,6 @@ async function openModalAddPhoto() {
 
     document.querySelector('#validatePhoto').reset()
     document.querySelector('#image-preview').src = ''
-
-    document.querySelector('#file').addEventListener('change', onPhotoChange)
 
     renderCategoriesInModal();
 }
