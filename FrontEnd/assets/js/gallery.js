@@ -284,9 +284,25 @@ async function openModalAddPhoto() {
     document.querySelector('#modalViewPhoto').classList.add('hide')
 
     document.querySelector('p.err').innerText = ''
-    document.querySelector('#title').value = ''
+
+    document.querySelector('#validatePhoto').reset()
+    document.querySelector('#image-preview').src = ''
+
+    document.querySelector('#file').addEventListener('change', onPhotoChange)
 
     renderCategoriesInModal();
+}
+
+// Show preview when selected photo change
+async function onPhotoChange(e) {
+    let selectedFile = e.target.files[0];
+    let reader = new FileReader();
+
+    let img = document.querySelector('#image-preview');
+
+    reader.onload = (event) => { img.src = event.target.result };
+
+    reader.readAsDataURL(selectedFile);
 }
 
 // Validate data from 'add photo modal' and send it function

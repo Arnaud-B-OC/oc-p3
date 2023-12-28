@@ -430,6 +430,7 @@ input:invalid {
 	display: none;
 }
 .file-label {
+	position: relative;
 	background-color: #E8F1F6;
 	display: flex;
 	flex-direction: column;
@@ -565,4 +566,26 @@ figure.hide {
 .logged #filters {
 	display: none;
 }
+
+/* Image Preview */
+#image-preview[src=''] {
+	display: none;
+}
+#image-preview {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+
+	height: 100%;
+	margin: 0;
+	width: 50%;
+	object-fit: contain;
+}
+
+
+
+
+
+
+
 
