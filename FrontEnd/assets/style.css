@@ -535,3 +535,34 @@ figure.hide {
 	opacity: 0;
 }
 
+
+
+/* Edition Bar */
+.edition-mode {
+	position: absolute;
+	top: 0px;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background-color: #000;
+	color: white;
+	display: none;
+	justify-content: center;
+    align-items: center;
+	gap: 10px;
+	cursor: default;
+}
+.edition-mode img {
+	filter: invert(100%) sepia(0%) saturate(1%) hue-rotate(63deg) brightness(105%) contrast(101%);
+}
+
+.logged header {
+	margin-top: 110px;
+}
+.logged .edition-mode {
+	display: flex;
+}
+.logged #filters {
+	display: none;
+}
+
