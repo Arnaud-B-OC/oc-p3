@@ -131,7 +131,7 @@ function renderProjectsInModal() {
     });
 }
 
-// TODO : Add comment
+// Render projects list with filter selection in main page function
 function renderProjectsFilter(filter = 0) {
     let gallery = document.querySelector('#gallery')
     if (!gallery.classList.contains('loading')) return;
