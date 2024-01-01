@@ -176,9 +176,10 @@ function createCategoryFilter(id, name, checked = false) {
     label.htmlFor = 'radio-'+id
     label.addEventListener('click', () => {
         let gallery = document.querySelector('#gallery')
-        gallery.classList.add('loading')
         selected_filter = id
-    })
+        if (gallery.classList.contains('loading')) renderProjectsFilter(selected_filter);
+        else gallery.classList.add('loading')
+    });
 
     div.appendChild(label)
     
