@@ -239,7 +239,7 @@ function loadConnexion() {
 
     document.getElementById('connect').addEventListener('submit', (e) => {
         e.preventDefault();
-        let data = Object.fromEntries(new FormData(document.getElementById('connect')));
+        let data = Object.fromEntries(new FormData(e.target));
 
         request('/users/login', JSON.stringify(data), 'POST').then((json) => {
             localStorage.setItem('token', json.token)
