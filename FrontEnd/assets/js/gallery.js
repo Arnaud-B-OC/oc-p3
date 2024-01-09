@@ -131,7 +131,7 @@ function renderProjectsInModal() {
     });
 }
 
-// TODO : Add comment
+// Render projects list with filter selection in main page function
 function renderProjectsFilter(filter = 0) {
     let gallery = document.querySelector('#gallery')
     if (!gallery.classList.contains('loading')) return;
@@ -176,9 +176,10 @@ function createCategoryFilter(id, name, checked = false) {
     label.htmlFor = 'radio-'+id
     label.addEventListener('click', () => {
         let gallery = document.querySelector('#gallery')
-        gallery.classList.add('loading')
         selected_filter = id
-    })
+        if (gallery.classList.contains('loading')) renderProjectsFilter(selected_filter);
+        else gallery.classList.add('loading')
+    });
 
     div.appendChild(label)
     
@@ -238,7 +239,7 @@ function loadConnexion() {
 
     document.getElementById('connect').addEventListener('submit', (e) => {
         e.preventDefault();
-        let data = Object.fromEntries(new FormData(document.getElementById('connect')));
+        let data = Object.fromEntries(new FormData(e.target));
 
         request('/users/login', JSON.stringify(data), 'POST').then((json) => {
             localStorage.setItem('token', json.token)
