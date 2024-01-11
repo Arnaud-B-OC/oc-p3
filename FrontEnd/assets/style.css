@@ -153,6 +153,7 @@ margin: auto;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+	margin: 0 auto;
 }
 
 #contact input {
@@ -244,11 +245,13 @@ nav a:hover {
 /* Connexion */
 section#connexion {
 	display: flex;
-	height: calc(100vh - 230px);
+	height: auto;
+	min-height: calc(100vh - 230px);
 	margin: 0;
 	flex-direction: column;
 	align-content: center;
     flex-wrap: wrap;
+	justify-content: center;
 }
 form {
 	display: flex;
@@ -258,7 +261,6 @@ form {
 }
 #connexion h2 {
 	text-align: center;
-	margin-top: 150px;
 }
 #connexion label {
 	margin-top: 30px;
